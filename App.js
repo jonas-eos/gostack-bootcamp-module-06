@@ -1,13 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
-const App = () => {
-  return (
+const App = () => (
     <View style={styles.container}>
       <Text style={styles.welcome}>Welcome to React Native!</Text>
     </View>
   );
-};
 
 const styles = StyleSheet.create({
   container: {
