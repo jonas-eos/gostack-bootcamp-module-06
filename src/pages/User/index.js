@@ -3,6 +3,10 @@ import { View } from 'react-native';
 
 // import { Container } from './styles';
 
-export default function Main() {
-  return <View />;
-}
+/**
+ * @const User
+ * @type {Component}
+ * @default
+ */
+const User = () => <View />;
+export default User;

@@ -1,8 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
-// import { Container } from './styles';
+/**
+ * @const Main
+ * @type {component}
+ * @default
+ */
+const Main = () => <View />;
 
-export default function Main() {
-  return <View />;
-}
+Main.navigationOptions = {
+  title: 'Users',
+};
+
+export default Main;

@@ -2,11 +2,12 @@
  * Main app page
  */
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import Reactotron from 'reactotron-react-native';
+import Routes from './routes';
 
 // Send a reactotron log
-const App = () => <View />;
+const App = () => <Routes />;
 
 export default App;
