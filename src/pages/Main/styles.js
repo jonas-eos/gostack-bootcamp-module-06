@@ -48,3 +48,84 @@ export const SubmitButton = styled(RectButton)`
   margin-left: 10px;
   padding: 0 12px;
 `;
+
+/**
+ * @const List
+ * @type {FlatList}
+ */
+export const List = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
+  margin-top: 20px;
+`;
+
+/**
+ * @const User
+ * @type {View}
+ */
+export const User = styled.View`
+  align-items: center;
+  margin: 0 20px 30px;
+`;
+
+/**
+ * @const Avatar
+ * @type {Image}
+ */
+export const Avatar = styled.Image`
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background: #eee;
+`;
+
+/**
+ * @const Name
+ * @type {Text}
+ */
+export const Name = styled.Text`
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  margin-top: 4px;
+  text-align: center;
+`;
+
+/**
+ * @const Bio
+ * @type {Text}
+ */
+export const Bio = styled.Text.attrs({
+  numberOfLines: 2,
+})`
+  font-size: 13px;
+  line-height: 18px;
+  color: #999;
+  margin-top: 5px;
+  text-align: center;
+`;
+
+/**
+ * @const ProfileButton
+ * @type {ReactButton}
+ */
+export const ProfileButton = styled(RectButton)`
+  margin-top: 10px;
+  align-self: stretch;
+  border-radius: 4px;
+  background: #e8a87c;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+`;
+
+/**
+ * @const ProfileButtonText
+ * @type {Text}
+ */
+export const ProfileButtonText = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+`;
