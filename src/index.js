@@ -7,7 +7,12 @@ import { StatusBar } from 'react-native';
 // import Reactotron from 'reactotron-react-native';
 import Routes from './routes';
 
-// Send a reactotron log
+/**
+ * The Main App component.
+ * @const App
+ * @type {Component}
+ * @default
+ */
 const App = () => (
   <>
     <StatusBar barStyle="light-content" backgroundColor="#E8A87C" />
