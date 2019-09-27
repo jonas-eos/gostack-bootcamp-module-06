@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../services/api';
 
-import Reactotron from 'reactotron-react-native';
 import { Container, Form, Input, SubmitButton } from './styles';
 
 /**
- * @const Main
- * @type {component}
- * @default
+ * Class representing the Main content
+ * @extends React.Component
  */
 export default class Main extends Component {
+  /** Create the App state. */
   constructor() {
     super();
     this.state = {
@@ -18,13 +19,40 @@ export default class Main extends Component {
     };
   }
 
-  handleAddUser = () => {
-    const { newUser } = this.state;
-    Reactotron.log(`${newUser}`);
+  /**
+   * Handle add user event.
+   * This event call the GitHub API and get the username, login, bio and avatar.
+   * All that information are updated in state.
+   * The newUser state property will be reset after add the new user
+   * And the smartphone keyboard will be dismissed.
+   * @function
+   * @name handleAddUser
+   * @async
+   */
+  handleAddUser = async () => {
+    const { users, newUser } = this.state;
+
+    const response = await api.get(`/users/${newUser}`);
+
+    const data = {
+      name: response.data.name,
+      login: response.data.login,
+      bio: response.data.bio,
+      avatar: response.data.avatar_url,
+    };
+
+    this.setState({
+      users: [...users, data],
+      newUser: '',
+    });
+
+    Keyboard.dismiss();
   };
 
+  /** Render the content */
   render() {
     const { users, newUser } = this.state;
+
     return (
       <Container>
         <Form>
