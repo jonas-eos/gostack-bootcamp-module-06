@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import Reactotron from 'reactotron-react-native';
 
 // import { Container } from './styles';
 
@@ -8,5 +9,13 @@ import { View } from 'react-native';
  * @type {Component}
  * @default
  */
-const User = () => <View />;
-export default User;
+export default function User(props) {
+  Reactotron.log(props);
+  return <View />;
+}
+
+User.navigationOptions = {
+  title: 'Details',
+};
+// const User = props => <View />;
+// export default User;
