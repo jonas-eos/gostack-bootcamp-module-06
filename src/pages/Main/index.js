@@ -25,6 +25,7 @@ import {
  * @extends React.Component
  */
 export default class Main extends Component {
+  /** Navigation title */
   static navigationOptions = {
     title: 'Users',
   };
@@ -94,6 +95,12 @@ export default class Main extends Component {
     Keyboard.dismiss();
   };
 
+  /**
+   * Handle the navigation to user profile page.
+   * @function
+   * @name handleNavigate
+   * @param {object} user
+   */
   handleNavigate = user => {
     const { navigation } = this.props;
 
@@ -146,6 +153,11 @@ export default class Main extends Component {
   }
 }
 
+/**
+ * Main propTypes
+ * Validate the navigation function.
+ * This function are required to call other pages
+ */
 Main.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
