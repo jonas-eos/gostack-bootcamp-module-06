@@ -1,10 +1,18 @@
 import styled from 'styled-components/native';
 
+/**
+ * @const Container
+ * @type {View}
+ */
 export const Container = styled.View`
   flex: 1;
   padding: 30px;
 `;
 
+/**
+ * @const Header
+ * @type {View}
+ */
 export const Header = styled.View`
   align-items: center;
   padding-bottom: 20px;
@@ -12,6 +20,10 @@ export const Header = styled.View`
   border-color: #eee;
 `;
 
+/**
+ * @const Avatar
+ * @type {Image}
+ */
 export const Avatar = styled.Image`
   width: 100px;
   height: 100px;
@@ -19,6 +31,10 @@ export const Avatar = styled.Image`
   background: #eee;
 `;
 
+/**
+ * @const Name
+ * @type {Text}
+ */
 export const Name = styled.Text`
   font-size: 20px;
   color: #333;
@@ -27,6 +43,10 @@ export const Name = styled.Text`
   text-align: center;
 `;
 
+/**
+ * @const Bio
+ * @type {Text}
+ */
 export const Bio = styled.Text`
   font-size: 14px;
   line-height: 18px;
@@ -35,12 +55,20 @@ export const Bio = styled.Text`
   text-align: center;
 `;
 
+/**
+ * @const Stars
+ * @type {FlatList}
+ */
 export const Stars = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
   margin-top: 20px;
 `;
 
+/**
+ * @const Starred
+ * @type {View}
+ */
 export const Starred = styled.View`
   background: #f5f5f5;
   border-radius: 4px;
@@ -50,6 +78,10 @@ export const Starred = styled.View`
   align-items: center;
 `;
 
+/**
+ * @const OwnerAvatar
+ * @type {Image}
+ */
 export const OwnerAvatar = styled.Image`
   height: 42px;
   width: 42px;
@@ -57,11 +89,19 @@ export const OwnerAvatar = styled.Image`
   background: #eee;
 `;
 
+/**
+ * @const Info
+ * @type {View}
+ */
 export const Info = styled.View`
   margin-left: 10px;
   flex: 1;
 `;
 
+/**
+ * @const Title
+ * @type {Text}
+ */
 export const Title = styled.Text.attrs({
   numbersOfLine: 1,
 })`
@@ -70,6 +110,10 @@ export const Title = styled.Text.attrs({
   color: #333;
 `;
 
+/**
+ * @const Author
+ * @type {Text}
+ */
 export const Author = styled.Text`
   font-size: 13px;
   color: #666;
