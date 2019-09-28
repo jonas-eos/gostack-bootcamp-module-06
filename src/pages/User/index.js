@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import api from '../../services/api';
@@ -32,6 +33,7 @@ export default class User extends Component {
     super();
     this.state = {
       stars: [],
+      loading: false,
     };
   }
 
@@ -46,17 +48,19 @@ export default class User extends Component {
    */
   async componentDidMount() {
     const { navigation } = this.props;
+
+    this.setState({ loading: true });
     const user = navigation.getParam('user');
 
     const reponse = await api.get(`/users/${user.login}/starred`);
 
-    this.setState({ stars: reponse.data });
+    this.setState({ stars: reponse.data, loading: false });
   }
 
   /** Render the content */
   render() {
     const { navigation } = this.props;
-    const { stars } = this.state;
+    const { stars, loading } = this.state;
     const user = navigation.getParam('user');
 
     return (
@@ -67,19 +71,23 @@ export default class User extends Component {
           <Bio>{user.bio}</Bio>
         </Header>
         {/* End header content */}
-        <Stars
-          data={stars}
-          keyExtractor={star => String(star.id)}
-          renderItem={({ item }) => (
-            <Starred>
-              <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
-              <Info>
-                <Title>{item.name}</Title>
-                <Author>{item.owner.login}</Author>
-              </Info>
-            </Starred>
-          )}
-        />
+        {loading ? (
+          <ActivityIndicator color="#e8a87c" />
+        ) : (
+          <Stars
+            data={stars}
+            keyExtractor={star => String(star.id)}
+            renderItem={({ item }) => (
+              <Starred>
+                <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
+                <Info>
+                  <Title>{item.name}</Title>
+                  <Author>{item.owner.login}</Author>
+                </Info>
+              </Starred>
+            )}
+          />
+        )}
         {/* End Stars Content */}
       </Container>
     );
