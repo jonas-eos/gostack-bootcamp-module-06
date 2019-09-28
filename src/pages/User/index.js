@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
+
 import api from '../../services/api';
+import { Container, Header, Avatar, Name, Bio } from './styles';
 
 // import { Container } from './styles';
 
@@ -44,8 +45,19 @@ export default class User extends Component {
 
   /** Render the content */
   render() {
+    const { navigation } = this.props;
     const { stars } = this.state;
-    return <View />;
+    const user = navigation.getParam('user');
+
+    return (
+      <Container>
+        <Header>
+          <Avatar source={{ uri: user.avatar }} />
+          <Name>{user.name}</Name>
+          <Bio>{user.bio}</Bio>
+        </Header>
+      </Container>
+    );
   }
 }
 
