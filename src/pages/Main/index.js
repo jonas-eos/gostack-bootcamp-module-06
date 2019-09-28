@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import api from '../../services/api';
 
 import {
@@ -30,6 +32,30 @@ export default class Main extends Component {
       users: [],
       loading: false,
     };
+  }
+
+  /**
+   * Get all users saved on local storage in mobile.
+   * @async
+   */
+  async componentDidMount() {
+    const users = await AsyncStorage.getItem('users');
+
+    if (users) {
+      this.setState({ users: JSON.parse(users) });
+    }
+  }
+
+  /**
+   * Update the user if it do not exists on localstorage in mobile.
+   * @param {object} prevState
+   */
+  componentDidUpdate(_, prevState) {
+    const { users } = this.state;
+
+    if (prevState.users !== users) {
+      AsyncStorage.setItem('users', JSON.stringify(users));
+    }
   }
 
   /**
