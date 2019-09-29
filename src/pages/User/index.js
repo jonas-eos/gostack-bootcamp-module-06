@@ -34,7 +34,16 @@ export default class User extends Component {
     this.state = {
       stars: [],
       loading: false,
+      page: [],
     };
+  }
+
+  /**
+   * Call the load event to get all starred from the user selected.
+   * @async
+   */
+  async componentDidMount() {
+    this.getStarred();
   }
 
   /**
@@ -46,16 +55,32 @@ export default class User extends Component {
    * the response data informations.
    * @async
    */
-  async componentDidMount() {
+  getStarred = async (page = 1) => {
+    const { stars } = this.state;
     const { navigation } = this.props;
 
-    this.setState({ loading: true });
     const user = navigation.getParam('user');
 
-    const reponse = await api.get(`/users/${user.login}/starred`);
+    const response = await api.get(`/users/${user.login}/starred`, {
+      params: { page },
+    });
 
-    this.setState({ stars: reponse.data, loading: false });
-  }
+    this.setState({
+      stars: page >= 2 ? [...stars, ...response.data] : response.data,
+      page,
+      loading: false,
+    });
+  };
+
+  /**
+   * Get new starred from the next page and call the load.
+   * @async
+   */
+  getNextPage = async () => {
+    const { page } = this.state;
+    const nextPage = page + 1;
+    this.getStarred(nextPage);
+  };
 
   /** Render the content */
   render() {
@@ -77,6 +102,8 @@ export default class User extends Component {
           <Stars
             data={stars}
             keyExtractor={star => String(star.id)}
+            onEndReachedThreshold={0.2}
+            onEndReached={this.getNextPage}
             renderItem={({ item }) => (
               <Starred>
                 <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
