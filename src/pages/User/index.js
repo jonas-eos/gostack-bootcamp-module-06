@@ -93,6 +93,12 @@ export default class User extends Component {
     this.getStarred();
   };
 
+  /**
+   * Handle the navigation to repository page.
+   * @function
+   * @name handleNavigate
+   * @param {object} repo
+   */
   handleNavigate = repo => {
     const { navigation } = this.props;
 
@@ -141,9 +147,10 @@ export default class User extends Component {
 }
 
 /**
- * Main propTypes
+ * User propTypes
  * Validate the navigation function.
- * This function to load params from the props object
+ * This function are used to load params from the props object
+ * and to call other page from the routes.
  */
 User.propTypes = {
   navigation: PropTypes.shape({
