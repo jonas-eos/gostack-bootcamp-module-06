@@ -35,6 +35,7 @@ export default class User extends Component {
       stars: [],
       loading: false,
       page: [],
+      refreshing: false,
     };
   }
 
@@ -69,23 +70,33 @@ export default class User extends Component {
       stars: page >= 2 ? [...stars, ...response.data] : response.data,
       page,
       loading: false,
+      refreshing: false,
     });
   };
 
   /**
    * Get new starred from the next page and call the load.
-   * @async
    */
-  getNextPage = async () => {
+  getNextPage = () => {
     const { page } = this.state;
     const nextPage = page + 1;
     this.getStarred(nextPage);
   };
 
+  /**
+   * Refresh class state.
+   * This method set refreshing on, and reset stars in state object.
+   * As a reload method, this method call getStarred to reload all Starred repo.
+   */
+  refreshState = () => {
+    this.setState({ refreshing: true, stars: [] });
+    this.getStarred();
+  };
+
   /** Render the content */
   render() {
     const { navigation } = this.props;
-    const { stars, loading } = this.state;
+    const { stars, loading, refreshing } = this.state;
     const user = navigation.getParam('user');
 
     return (
@@ -104,6 +115,8 @@ export default class User extends Component {
             keyExtractor={star => String(star.id)}
             onEndReachedThreshold={0.2}
             onEndReached={this.getNextPage}
+            onRefresh={this.refreshState}
+            refreshing={refreshing}
             renderItem={({ item }) => (
               <Starred>
                 <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
